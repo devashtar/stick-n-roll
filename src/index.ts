@@ -101,7 +101,11 @@ enum State {
 type Rules = Pick<CSSStyleDeclaration, 'width' | 'left' | 'top' | 'position' | 'transform'>;
 
 /**
+ * Stick-N-Roll.
  * Helps to give an element sticky scrolling capability.
+ * @version 1.0.3
+ * @author devashtar <omg.michael.here@gmail.com>
+ * @license The MIT License (MIT)
  */
 export class StickNRoll {
     /**
