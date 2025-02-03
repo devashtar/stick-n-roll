@@ -93,4 +93,4 @@ React.useEffect(() => {
 
 ## Copyright and license
 
-Code copyright 2025 the [author](https://github.com/devashtar). Code released under the [MIT License](./README.MD).
+Code copyright 2025 the [author](https://github.com/devashtar). Code released under the [MIT License](./LICENSE).
