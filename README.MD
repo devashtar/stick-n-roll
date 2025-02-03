@@ -1,5 +1,7 @@
 **`stick-n-roll`** is a lightweight and user-friendly npm package that enables HTML elements to have functionality similar to position: sticky, with the added ability to scroll the block.
 
+[`Preview`](https://devashtar.github.io/stick-n-roll/)
+
 **Key Features**:
 - **Easy Integration**: Simply install the package and add a few lines of code to activate the functionality.
 - **Block Scrolling**: Unlike standard position: sticky, sticky-scroll allows the block to scroll while maintaining its "stickiness" as the user scrolls the page.
