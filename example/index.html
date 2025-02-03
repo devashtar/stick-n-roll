@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *,*::before,::after {
+            box-sizing: border-box;
+        }
+
+        h3 {
+            margin: 0.5rem;
+        }
+
+        header {
+            position: sticky;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            min-height: 56px;
+            max-height: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
+        }
+
+        main {
+            margin: auto;
+            padding: 3rem 1rem;
+            max-width: 1280px;
+            display: flex;
+            column-gap: 1rem;
+        }
+
+        #my-container {
+            min-width: 280px;
+            max-width: 280px;
+        }
+
+        #my-target-element {
+            border-radius: 0.5rem;
+            padding: 1.5rem 1rem;
+        }
+
+        section {
+            padding: 1.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        footer {
+            min-height: 480px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <title>Stick-N-Roll</title>
+</head>
+<body class="bg-light">
+    <header class="bg-secondary">
+        <h3>Header content</h3>
+    </header>
+    <main>
+        <aside id="my-container">
+            <div id="my-target-element" class="bg-warning-subtle border">
+                <div>...</div>
+                <hr>
+                <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Click here
+                </button>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        ...
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <section class="bg-white">
+            <h3>Section content</h3>
+            <div>...</div>
+        </section>
+    </main>
+    <footer class="bg-secondary">
+        <h3>Footer content</h3>
+    </footer>
+
+    <script type="module">
+        // Example
+        import StickNRoll from './sticknroll.mjs';
+        const container = document.getElementById('my-container');
+        const targetElement = document.getElementById('my-target-element');
+        const stickNRoll = new StickNRoll(container, targetElement, { spaceBottom: 8, spaceTop: 64, position: 'relative' });
+        stickNRoll.enable();
+    </script>
+
+    <script>
+        // Fill all elements with text
+        const text = '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit perferendis nulla laboriosam repellendus nihil ab voluptatum, beatae nesciunt dolores voluptate obcaecati dicta vitae veritatis, qui doloribus dignissimos ullam et. Consequuntur!</p>';
+        const section = document.querySelector('section div');
+        const sedibarText = document.getElementById('my-target-element').children[0];
+        const collapse = document.getElementById('collapseExample');
+        section.innerHTML = text.repeat(30)
+        sedibarText.innerHTML = text.repeat(2)
+        collapse.innerHTML = text.repeat(3)
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
