@@ -103,7 +103,7 @@ type Rules = Pick<CSSStyleDeclaration, 'width' | 'left' | 'top' | 'position' | '
 /**
  * Stick-N-Roll.
  * Helps to give an element sticky scrolling capability.
- * @version 1.0.3
+ * @version 1.0.4
  * @author devashtar <omg.michael.here@gmail.com>
  * @license The MIT License (MIT)
  */
@@ -185,9 +185,19 @@ export class StickNRoll {
     private colliderHeight: number;
 
     /**
+     * Previous height of the {@link collider}.
+     */
+    private prevColliderHeight: number;
+
+    /**
      * Top coordinate of the {@link collider}.
      */
     private colliderTop: number;
+
+    /**
+     * Previous top coordinate of the {@link collider}.
+     */
+    private prevColliderTop: number;
 
     /**
      * Previous coordinate by X-axis of the {@link https://developer.mozilla.org/en-US/docs/Glossary/Viewport|viewport}.
@@ -255,7 +265,9 @@ export class StickNRoll {
         this.isRunningRequest = false;
 
         this.colliderHeight = 0;
+        this.prevColliderHeight = 0;
         this.colliderTop = 0;
+        this.prevColliderTop = 0;
 
         this.containerHeight = 0;
         this.containerWidth = 0;
@@ -382,9 +394,9 @@ export class StickNRoll {
             this.rules = {};
         } else if (state === State.TranslateY) {
             if (this.prevState === State.ColliderTop) {
-                this.translateY = this.colliderTop - this.containerTop;
+                this.translateY = this.prevColliderTop - this.containerTop;
             } else if (this.prevState === State.ColliderBottom) {
-                this.translateY = this.colliderTop + this.colliderHeight - this.containerTop - this.prevElementHeight;
+                this.translateY = this.prevColliderTop + this.colliderHeight - this.containerTop - this.prevElementHeight;
             } else if (this.prevState === State.ContainerBottom) {
                 this.translateY = this.containerHeight - this.element.offsetHeight;
             }
@@ -429,7 +441,9 @@ export class StickNRoll {
                 this.prevViewportScrollX !== window.scrollX ||
                 this.prevContainerLeft !== this.containerLeft ||
                 this.prevContainerWidth !== this.containerWidth ||
-                this.prevContainerTop !== this.containerTop
+                this.prevContainerTop !== this.containerTop ||
+                this.prevColliderHeight !== this.colliderHeight ||
+                this.prevColliderTop !== this.colliderTop
             ) {
                 return State.ColliderTop;
             }
@@ -450,7 +464,9 @@ export class StickNRoll {
                 this.prevViewportScrollX !== window.scrollX ||
                 this.prevContainerLeft !== this.containerLeft ||
                 this.prevContainerWidth !== this.containerWidth ||
-                this.prevContainerTop !== this.containerTop
+                this.prevContainerTop !== this.containerTop ||
+                this.prevColliderHeight !== this.colliderHeight ||
+                this.prevColliderTop !== this.colliderTop
             ) {
                 return State.ColliderBottom;
             }
@@ -546,7 +562,8 @@ export class StickNRoll {
             this._render(state);
             this.prevState = state;
         }
-
+        
+        this.prevColliderTop = this.colliderTop;
         this.prevViewportScrollX = window.scrollX;
         this.prevViewportScrollY = window.scrollY;
     }

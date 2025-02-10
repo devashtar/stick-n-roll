@@ -1,13 +1,19 @@
+# stick-n-roll
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
+[![npm version](https://badge.fury.io/js/stick-n-roll.svg)](https://www.npmjs.com/package/stick-n-roll)
+
 **`stick-n-roll`** is a lightweight and user-friendly npm package that enables HTML elements to have functionality similar to position: sticky, with the added ability to scroll the block.
 
-[`Preview`](https://devashtar.github.io/stick-n-roll/)
+### [Demo](https://devashtar.github.io/stick-n-roll/)
 
-**Key Features**:
-- **Easy Integration**: Simply install the package and add a few lines of code to activate the functionality.
-- **Block Scrolling**: Unlike standard position: sticky, sticky-scroll allows the block to scroll while maintaining its "stickiness" as the user scrolls the page.
-- **Customizable Options**: Easily configure the block's behavior with parameters such as `spaceBottom`, `spaceTop` to add margins and default `position` for `target` element.
-- **Cross-Browser Support**: The package works seamlessly across all modern browsers, ensuring consistent behavior on different platforms.
-- **Simplicity of Use**: Minimal code required for setup, providing maximum flexibility in usage.
+## Features
+
+- 🌟 **Simple Integration**: Install the package and add a few lines of code
+- 🔄 **Block Scrolling**: Unlike native CSS sticky positioning, allows scrolling while maintaining stickiness
+- ⚙️ **Customizable Behavior**: Configure spacing and positioning through options
+- 📱 **Cross-browser Compatible**: Works seamlessly across modern browsers
+- 💻 **Minimal Setup**: Maximum flexibility with minimal configuration
 
 
 ## Table of contents
@@ -19,7 +25,7 @@
 
 ## Installing
 ```sh
-npm install --save-dev stick-n-roll
+npm install stick-n-roll
 ```
 
 ## Using
@@ -36,45 +42,85 @@ npm install --save-dev stick-n-roll
             ...
         </section>
     </main>
-    <script>
-        const StickNRoll = require('stick-n-roll');
+    <script type="module">
+        import StickNRoll from 'stick-n-roll';
         const container = document.getElementById('container');
         const targetElement = document.getElementById('target-element');
         const stickNRoll = new StickNRoll(container, targetElement, { spaceBottom: 8, spaceTop: 64 });
         stickNRoll.enable();
+        // stickNRoll.updateSpaces({ spaceTop: 96, spaceBottom: 16, }); // Change spaces dynamically
+        // stickNRoll.disable(); // disable listeners and stop running. You can start it again with help "enable()".
     </script>
 </body>
 ```
 
-### Native javascript
+### React typescript
 
-```js
-const StickNRoll = require('stick-n-roll');
-const container = document.getElementById('container');
-const targetElement = document.getElementById('target-element');
-const stickNRoll = new StickNRoll(container, targetElement, { spaceBottom: 8, spaceTop: 64, position: 'relative' });
-stickNRoll.enable(); // start
-// stickNRoll.updateSpaces({ spaceTop: 96, spaceBottom: 16, }); // Change spaces dynamically
-// stickNRoll.disable(); // disable listeners and stop running. You can start it again with help "enable()".
-```
-
-### React ts
+See also: [tailwind](https://tailwindcss.com/docs/) (version 4)
 
 ```ts
+import React from "react"
 import StickNRoll from 'stick-n-roll';
 
-// ...
-const ref = React.useRef<StickNRoll>(new StickNRoll(containerRef, targetElementRef, { spaceBottom: 8, spaceTop: 64 }));
+export const App:React.FunctionComponent = () => {
+  const [enableSpaces, setEnableSpaces] = React.useState<boolean>(true); 
+  const stickNRoll = React.useRef<StickNRoll>(null);
 
-React.useEffect(() => {
-    if (ref.current) {
-        ref.current.enable(); // add listeners
-        return () => {
-            ref.current.disable(); // delete listeners
-        };
+  const refCallback = React.useCallback((node: HTMLDivElement) => {
+    if (node) {
+        stickNRoll.current = new StickNRoll(node.parentElement!, node, { spaceBottom: 8, spaceTop: 64 });
     }
-}, []);
-// ...
+  }, [])
+
+  React.useEffect(() => {
+    if (stickNRoll.current) {
+      stickNRoll.current.enable()
+
+      return () => {
+        stickNRoll.current?.disable()
+      }
+    }
+  }, [])
+
+  const changeSpaces = () => {
+    if (enableSpaces) {
+      stickNRoll.current?.updateSpaces({ spaceTop: 0, spaceBottom: 0 });
+      setEnableSpaces(false)
+    } else {
+      stickNRoll.current?.updateSpaces({ spaceTop: 64, spaceBottom: 8 });
+      setEnableSpaces(true)
+    }
+  }
+
+  // See https://tailwindcss.com/docs/ (version 4.0) to style elements with utility classes
+
+  return (
+    <>
+      <header className="sticky top-0 text-center bg-gray-500 z-1 max-h-14 h-14 p-2 shadow-lg" style={{ height: 64 }}>
+        <button 
+          className="rounded-full cursor-pointer bg-sky-500 px-5 py-2 text-sm leading-5 font-semibold text-white hover:bg-sky-700"
+          onClick={changeSpaces}>
+          Click to change spaces
+        </button>
+        Header content
+      </header>
+      
+      <main className="my-12 max-w-7xl w-full mx-auto grid grid-cols-12 gap-5">
+        <aside className="col-span-3">
+          <div ref={refCallback} className="rounded bg-blue-200">
+            {Array(50).fill(null).map((_, idx) => <p key={idx}>Sidebar content - {idx}</p>)}
+          </div>
+        </aside>
+
+        <div className="col-span-9 p-3 border rounded">
+          {Array(140).fill(null).map((_, idx) => <p key={idx}>General content - {idx}</p>)}
+        </div>
+      </main>
+
+      <footer className="min-h-96 bg-gray-500">Footer Content</footer>
+    </>
+  )
+}
 ```
 
 ## Links
