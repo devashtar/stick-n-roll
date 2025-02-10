@@ -101,9 +101,9 @@ enum State {
 type Rules = Pick<CSSStyleDeclaration, 'width' | 'left' | 'top' | 'position' | 'transform'>;
 
 /**
- * Stick-N-Roll.
- * Helps to give an element sticky scrolling capability.
- * @version 1.0.4
+ * stick-n-roll - helps to give an element sticky scrolling capability.
+ * @version 1.0.5
+ * @link https://github.com/devashtar/stick-n-roll
  * @author devashtar <omg.michael.here@gmail.com>
  * @license The MIT License (MIT)
  */
@@ -185,11 +185,6 @@ export class StickNRoll {
     private colliderHeight: number;
 
     /**
-     * Previous height of the {@link collider}.
-     */
-    private prevColliderHeight: number;
-
-    /**
      * Top coordinate of the {@link collider}.
      */
     private colliderTop: number;
@@ -216,10 +211,22 @@ export class StickNRoll {
     private spaceTop: number;
 
     /**
+     * Previous space top.
+     * @default 0
+     */
+    private prevSpaceTop: number;
+    
+    /**
      * Space bottom.
      * @default 0
      */
     private spaceBottom: number;
+
+    /**
+     * Previous space bottom.
+     * @default 0
+     */
+    private prevSpaceBottom: number;
 
     /**
      *  Resize observer.
@@ -265,7 +272,6 @@ export class StickNRoll {
         this.isRunningRequest = false;
 
         this.colliderHeight = 0;
-        this.prevColliderHeight = 0;
         this.colliderTop = 0;
         this.prevColliderTop = 0;
 
@@ -296,7 +302,9 @@ export class StickNRoll {
         this.rules = {};
 
         this.spaceBottom = options?.spaceBottom ?? 0;
+        this.prevSpaceBottom = options?.spaceBottom ?? 0;
         this.spaceTop = options?.spaceTop ?? 0;
+        this.prevSpaceTop = options?.spaceTop ?? 0;
 
         // Binds "this" context to the following class methods.
         this._calcDims = this._calcDims.bind(this);
@@ -442,8 +450,8 @@ export class StickNRoll {
                 this.prevContainerLeft !== this.containerLeft ||
                 this.prevContainerWidth !== this.containerWidth ||
                 this.prevContainerTop !== this.containerTop ||
-                this.prevColliderHeight !== this.colliderHeight ||
-                this.prevColliderTop !== this.colliderTop
+                this.prevSpaceBottom !== this.spaceBottom ||
+                this.prevSpaceTop !== this.spaceTop
             ) {
                 return State.ColliderTop;
             }
@@ -465,8 +473,8 @@ export class StickNRoll {
                 this.prevContainerLeft !== this.containerLeft ||
                 this.prevContainerWidth !== this.containerWidth ||
                 this.prevContainerTop !== this.containerTop ||
-                this.prevColliderHeight !== this.colliderHeight ||
-                this.prevColliderTop !== this.colliderTop
+                this.prevSpaceBottom !== this.spaceBottom ||
+                this.prevSpaceTop !== this.spaceTop
             ) {
                 return State.ColliderBottom;
             }
@@ -548,6 +556,8 @@ export class StickNRoll {
         this.prevContainerTop = this.containerTop;
         this.prevElementHeight = this.element.offsetHeight;
         this.prevStrategy = this.strategy;
+        this.prevSpaceBottom = this.spaceBottom;
+        this.prevSpaceTop = this.spaceTop;
     }
 
     /**

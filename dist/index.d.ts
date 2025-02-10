@@ -19,9 +19,9 @@ type OptionsType = {
     position?: CSSStyleDeclaration['position'];
 };
 /**
- * Stick-N-Roll.
- * Helps to give an element sticky scrolling capability.
- * @version 1.0.4
+ * stick-n-roll - helps to give an element sticky scrolling capability.
+ * @version 1.0.5
+ * @link https://github.com/devashtar/stick-n-roll
  * @author devashtar <omg.michael.here@gmail.com>
  * @license The MIT License (MIT)
  */
@@ -88,10 +88,6 @@ declare class StickNRoll {
      */
     private colliderHeight;
     /**
-     * Previous height of the {@link collider}.
-     */
-    private prevColliderHeight;
-    /**
      * Top coordinate of the {@link collider}.
      */
     private colliderTop;
@@ -113,10 +109,20 @@ declare class StickNRoll {
      */
     private spaceTop;
     /**
+     * Previous space top.
+     * @default 0
+     */
+    private prevSpaceTop;
+    /**
      * Space bottom.
      * @default 0
      */
     private spaceBottom;
+    /**
+     * Previous space bottom.
+     * @default 0
+     */
+    private prevSpaceBottom;
     /**
      *  Resize observer.
      */
