@@ -126,13 +126,13 @@ export const App:React.FunctionComponent = () => {
 ## Preview
 
 ### Features:
-[![See video](./asssets/features.png)](./asssets/features.mp4)
+[![See video](./assets/features.png)](./assets/features.mp4)
 
 ### Resize listener:
-[![See video](./asssets/resize.png)](./asssets/resize.mp4)
+[![See video](./assets/resize.png)](./assets/resize.mp4)
 
 ### Updating spaces:
-[![See video](./asssets/update_spaces.png)](./asssets/update_spaces.mp4)
+[![See video](./assets/update_spaces.png)](./assets/update_spaces.mp4)
 
 ## Links
 
