@@ -20,7 +20,7 @@ type OptionsType = {
 };
 /**
  * stick-n-roll - helps to give an element sticky scrolling capability.
- * @version 1.0.5
+ * @version 1.0.6
  * @link https://github.com/devashtar/stick-n-roll
  * @author devashtar <omg.michael.here@gmail.com>
  * @license The MIT License (MIT)

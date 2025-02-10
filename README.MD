@@ -123,6 +123,17 @@ export const App:React.FunctionComponent = () => {
 }
 ```
 
+## Preview
+
+### Features:
+[![See video](./asssets/features.png)](./asssets/features.mkv)
+
+### Resize listener:
+[![See video](./asssets/resize.png)](./asssets/resize.mkv)
+
+### Updating spaces:
+[![See video](./asssets/update_spaces.png)](./asssets/update_spaces.mkv)
+
 ## Links
 
 - [DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM)
