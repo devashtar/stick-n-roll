@@ -12,7 +12,7 @@
 ## Table of contents
 
 - [Installation](#installation-️)
-- [Available Methods and Options](#available-methods-and-options-️)
+- [API Reference](#api-reference-️)
 - [Example Usage](#example-usage-)
 - [Copyright and license](#copyright-and-license)
 
@@ -26,43 +26,80 @@ npm install stick-n-roll
 
 ---
 
-## Available Methods and Options ⚙️
+## API Reference ⚙️
 
 ### Constructor
 
-**`new StickNRoll(container, containerInner, options)`**
+```ts
+new StickNRoll(
+  container: HTMLElement,
+  containerInner: HTMLElement,
+  options?: StickNRollOptions
+)
+```
 
-Creates a new instance of StickNRoll. Parameters:
+Creates a new `StickNRoll` instance and binds scroll behavior to the provided elements.
 
-- **container** (HTMLElement): The parent block that serves as the guide for the inner container.
-- **containerInner** (HTMLElement): The child block that will move along the parent.
-- **options** (object, optional):
-  - **spaceTop** (number, optional): Top margin for the collider.
-  - **spaceBottom** (number, optional): Bottom margin for the collider.
-  - **position** (any, optional): Default property value assigned when the block is deactivated or returned to its initial position.
+### Parameters
 
-### Important Notes ⚠️
+| Name             | Type                | Description                                                                                                                                                         |
+| ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `container`      | `HTMLElement`       | Parent element that defines the sticky boundaries.<br/>Must have a **fixed width** so the inner element can inherit it.<br/>Do not apply **padding** (CSS property) |
+| `containerInner` | `HTMLElement`       | Child element that becomes sticky while scrolling.<br/>Do not apply **margin** (CSS property)                                                                       |
+| `options`        | `object` (optional) | Optional configuration options.                                                                                                                                     |
 
-- The **container** must have a fixed width; this is required for the **containerInner** to inherit this property.
-- Do not set horizontal padding for the **container**.
-- Do not set margins for the **containerInner**.
+> See: [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding), [margin](https://developer.mozilla.org/en-US/docs/Web/CSS/margin) and [width](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/width).
 
-### Methods 📝
+---
 
-- **`enable()`** 🔓
+### Options
 
-  Activates the sticky block, allowing it to stick during scrolling.
+| Option        | Type                | Default     | Description                                                    |
+| ------------- | ------------------- | ----------- | -------------------------------------------------------------- |
+| `spaceTop`    | `number` (optional) | `0`         | Offset from the top boundary in pixels.                        |
+| `spaceBottom` | `number` (optional) | `0`         | Offset from the bottom boundary in pixels.                     |
+| `position`    | `string` (optional) | `"initial"` | CSS `position` value applied when sticky behavior is disabled. |
 
-- **`disable()`** 🔒
+> See: [position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) and [pixels](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length#px)
 
-  Deactivates the sticky block, returning it to normal behavior.
+---
 
-- **`updateSpaces(options)`** ✏️
+## Methods
 
-  Updates the margins for the collider, which acts as a boundary for the sticky block. Parameters:
-  - **options** (object, optional):
-    - **spaceBottom** (number, optional): New bottom margin for the collider.
-    - **spaceTop** (number, optional): New top margin for the collider.
+### `enable()`
+
+Activates sticky behavior and starts listening to scroll events.
+
+```js
+sticky.enable();
+```
+
+---
+
+### `disable()`
+
+Disables sticky behavior and restores the original layout.
+
+```js
+sticky.disable();
+```
+
+---
+
+### `updateSpaces(options?)`
+
+Updates spacing offsets at runtime.
+
+```js
+sticky.updateSpaces({ spaceTop: 24, spaceBottom: 32 });
+```
+
+#### Parameters
+
+| Option        | Type                | Description                  |
+| ------------- | ------------------- | ---------------------------- |
+| `spaceTop`    | `number` (optional) | New top offset in pixels.    |
+| `spaceBottom` | `number` (optional) | New bottom offset in pixels. |
 
 ---
 
