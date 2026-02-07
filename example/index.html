@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./bootstrap.min.css" />
+    <title>Stick-N-Roll</title>
+  </head>
+
+  <body class="bg-dark">
+    <header class="bg-secondary position-sticky top-0 left-0 text-center z-1 py-2 shadow">
+      <h3>Header</h3>
+    </header>
+
+    <main class="d-flex mx-auto my-5" style="width: 1280px">
+      <aside id="container" class="me-2" style="width: 280px">
+        <div id="container_inner" class="bg-light p-3 rounded text-secondary">
+          <!-- Content is added by ./content.js -->
+        </div>
+      </aside>
+
+      <section class="bg-secondary w-auto rounded p-2">
+        <pre id="eiffel">
+          <!-- Content is added by ./content.js -->
+        </pre>
+      </section>
+    </main>
+
+    <footer class="bg-secondary d-flex justify-content-center align-items-center" style="min-height: 480px">
+      <h3>Footer</h3>
+    </footer>
+
+    <script src="./content.js"></script>
+    <script src="./bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+      import StickNRoll from './index.mjs';
+
+      const stickNRoll = new StickNRoll(
+        document.getElementById('container'),
+        document.getElementById('container_inner'),
+        { spaceBottom: 8, spaceTop: 64, position: 'relative' },
+      );
+      stickNRoll.enable();
+
+      // Code below is just for demonstration of activation StickNRoll manualy
+      document.getElementById('button').addEventListener('click', (e) => {
+        if (e.target.innerHTML === 'Disable StickNRoll') {
+          e.target.innerHTML = 'Enable StickNRoll';
+          stickNRoll.disable();
+        } else {
+          e.target.innerHTML = 'Disable StickNRoll';
+          stickNRoll.enable();
+        }
+      });
+    </script>
+  </body>
+</html>
