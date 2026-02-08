@@ -1,7 +1,7 @@
 {
   "name": "stick-n-roll",
-  "version": "1.1.1",
-  "description": "stick-n-roll is a lightweight and user-friendly npm package that enables HTML elements to have functionality similar to position: sticky, with the added ability to scroll the block.",
+  "version": "1.1.2",
+  "description": "stick-n-roll is a lightweight, dependency-free npm package that adds sticky-like behavior with scrolling for elements like sidebars.",
   "homepage": "https://devashtar.github.io/stick-n-roll/",
   "repository": {
     "type": "git",
@@ -27,18 +27,15 @@
   },
   "keywords": [
     "sticky",
-    "fixed",
-    "scroll",
-    "ui",
     "sidebar",
-    "aside",
-    "position",
-    "sticky",
-    "element",
+    "scroll",
+    "sticky-scroll",
+    "layout",
+    "ui",
+    "dom",
     "frontend",
-    "smart block",
-    "web development",
-    "user experience"
+    "javascript",
+    "typescript"
   ],
   "author": "devashtar",
   "license": "MIT",

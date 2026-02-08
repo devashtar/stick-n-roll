@@ -3,11 +3,17 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 [![npm version](https://badge.fury.io/js/stick-n-roll.svg)](https://www.npmjs.com/package/stick-n-roll)
 
-**`stick-n-roll`** is a lightweight and user-friendly npm package that enables HTML elements to have functionality similar to position: sticky, with the added ability to scroll the block.
+**`stick-n-roll`** is a **lightweight**, **dependency-free** npm package that adds sticky-like behavior with scrolling for elements like sidebars.
 
 ## [Demo](https://devashtar.github.io/stick-n-roll/) 👈
 
 ![Preview](./docs/demonstration.gif)
+
+## Concept
+
+![Preview](./docs/concept.jpg)
+
+> [Viewport concepts](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/CSSOM_view/Viewport_concepts) | [Viewport](https://www.w3.org/TR/CSS2/visuren.html#viewport) | [Collider](https://socs.binus.ac.id/2017/03/09/collision-detection-in-2d-part-2/)
 
 ## Table of contents
 
@@ -34,7 +40,7 @@ npm install stick-n-roll
 new StickNRoll(
   container: HTMLElement,
   containerInner: HTMLElement,
-  options?: StickNRollOptions
+  options?: Object
 )
 ```
 
@@ -46,7 +52,7 @@ Creates a new `StickNRoll` instance and binds scroll behavior to the provided el
 | ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `container`      | `HTMLElement`       | Parent element that defines the sticky boundaries.<br/>Must have a **fixed width** so the inner element can inherit it.<br/>Do not apply **padding** (CSS property) |
 | `containerInner` | `HTMLElement`       | Child element that becomes sticky while scrolling.<br/>Do not apply **margin** (CSS property)                                                                       |
-| `options`        | `object` (optional) | Optional configuration options.                                                                                                                                     |
+| `options`        | `object` (optional) | Optional configuration [options](#options).                                                                                                                         |
 
 > See: [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding), [margin](https://developer.mozilla.org/en-US/docs/Web/CSS/margin) and [width](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/width).
 
@@ -112,9 +118,9 @@ sticky.updateSpaces({ spaceTop: 24, spaceBottom: 32 });
   <h1>Example</h1>
   <main>
     <aside id="container">
-      <div id="container_inner">Sidebar content...</div>
+      <div id="container_inner"><!-- Sidebar content --></div>
     </aside>
-    <section>...</section>
+    <section><!-- Section content --></section>
   </main>
   <script type="module">
     import StickNRoll from 'stick-n-roll';
@@ -124,7 +130,7 @@ sticky.updateSpaces({ spaceTop: 24, spaceBottom: 32 });
       { spaceBottom: 8, spaceTop: 64 },
     );
     stickNRoll.enable();
-    // stickNRoll.updateSpaces({ spaceTop: 96, spaceBottom: 16, }); // Change spaces dynamically
+    // stickNRoll.updateSpaces({ spaceTop: 96, spaceBottom: 16, });
     // stickNRoll.disable(); // disables listeners, resets styles, and stops running. To order start again stickNRoll.enable().
   </script>
 </body>

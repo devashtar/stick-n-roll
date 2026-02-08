@@ -95,8 +95,8 @@ enum State {
 type Rules = Pick<CSSStyleDeclaration, 'width' | 'left' | 'top' | 'position' | 'transform'>;
 
 /**
- * stick-n-roll - helps to give an element sticky scrolling capability.
- * @version 1.1.0
+ * stick-n-roll is a lightweight, dependency-free npm package that adds sticky-like behavior with scrolling for elements like sidebars.
+ * @version 1.1.2
  * @link https://github.com/devashtar/stick-n-roll
  * @author devashtar <omg.michael.here@gmail.com>
  * @license The MIT License (MIT)
